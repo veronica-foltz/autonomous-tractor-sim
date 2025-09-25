@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Autonomous Tractor Simulation</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="container">
+    <h1 class="title">🚜 Autonomous Tractor Simulation</h1>
+    <p class="subtitle">Set obstacles by clicking field, hit mow field & then drive! <br> Simulation will calculate steps, turns, fuel, time, and coverage (%)
+</p>
+  </header>
+
+  <main class="container">
+    <!-- Toolbar -->
+    <section class="panel toolbar">
+      <div class="group">
+        <button id="clear" class="btn">Clear Field</button>
+        <button id="random" class="btn">Random Rocks</button>
+      </div>
+
+      <div class="group">
+        <button id="plan" class="btn btn-primary">Plan Path</button>
+        <button id="mow" class="btn">Mow Field</button>
+        <button id="drive" class="btn btn-accent">Drive</button>
+        <button id="stop" class="btn btn-danger">Stop</button>
+      </div>
+
+      <div class="group">
+        <label class="field">
+          <span>Speed</span>
+          <input id="speed" type="range" min="1" max="10" value="5" />
+        </label>
+
+        <label class="field">
+          <span>Obstacle density</span>
+          <input id="density" type="range" min="0" max="100" value="20" />
+        </label>
+      </div>
+    </section>
+
+    <!-- Mode segmented control -->
+    <section class="panel modes">
+      <div class="segmented">
+        <label><input type="radio" name="mode" value="rocks" checked><span>Rocks</span></label>
+        <label><input type="radio" name="mode" value="start"><span>Set Start</span></label>
+        <label><input type="radio" name="mode" value="goal"><span>Set Goal</span></label>
+      </div>
+      <div class="legend">
+        <span class="chip start">Start</span>
+        <span class="chip goal">Goal</span>
+        <span class="chip rock">Rock</span>
+        <span class="chip path">Path</span>
+        <span class="chip tractor">Tractor</span>
+      </div>
+    </section>
+
+    <!-- Canvas -->
+    <section class="canvas-wrap panel">
+      <canvas id="grid" width="720" height="480"></canvas>
+    </section>
+
+    <!-- Stats -->
+    <section class="panel stats">
+      <div class="stat"><strong id="steps">steps: 0</strong></div>
+      <div class="stat"><strong id="turns">turns: 0</strong></div>
+      <div class="stat"><strong id="fuel">fuel (rough): 0</strong></div>
+      <div class="stat"><strong id="time">time (sim): 0s</strong></div>
+      <div class="stat"><strong id="coverage">coverage: 0%</strong></div>
+      <div class="progress"><div id="covbar" class="bar" style="width:0%"></div></div>
+    </section>
+
+    <!-- Status bar -->
+    <section class="status panel" id="status">Ready.</section>
+  </main>
+
+  <footer class="container footer">
+    <span>Veronica Foltz</span>
+  </footer>
+
+  <script src="main.js"></script>
+</body>
+</html>
