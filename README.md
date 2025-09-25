@@ -2,7 +2,7 @@
 
 Live demo: https://veronica-foltz.github.io/autonomous-tractor-sim/
 
-A tiny, browser-based simulator for autonomous field navigation. It plans a shortest path with A* and can mow/cover the entire field with a boustrophedon sweep. Includes a clean UI, live speed control, Stop button, obstacle randomization, and coverage metrics. Runs 100% client-side—no installs.
+A browser-based simulator for autonomous field navigation. It plans a shortest path with A* and can mow/cover the entire field with a boustrophedon sweep. Includes a clean UI, live speed control, Stop button, obstacle randomization, and coverage metrics. Runs 100% client-side—no installs.
 
 ---
 
