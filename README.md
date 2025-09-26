@@ -30,11 +30,3 @@ How it works
 - A* uses Manhattan distance and expands 4 neighbors
 - Coverage orders free cells in a snake (boustrophedon) pattern and chains them with A*, skipping unreachable islands.
 
----
-
-Live
-Deployed with GitHub Pages
-https://veronica-foltz.github.io/autonomous-tractor-sim/
-
-
----
