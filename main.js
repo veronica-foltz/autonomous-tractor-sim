@@ -27,8 +27,8 @@ let goal  = { c: COLS - 2, r: ROWS - 2 };
 let path  = [];
 let tractor = { ...start, dir: "E" };
 let driving = false;
-let editMode = "rocks"; // "rocks" | "start" | "goal"
 let driveTimer = null;
+let pendingMove = null; // null | "start" | "goal"
 
 function index(c, r) { return r * COLS + c; }
 
@@ -198,15 +198,16 @@ function applyDensityFromSlider() {
   showStatus(`Rocks randomized to ${percent}%`);
 }
 
-function mouseToCell(e) {
-  // Use client size (excludes borders) to compute scale
-  const scaleX = canvas.width  / canvas.clientWidth;
-  const scaleY = canvas.height / canvas.clientHeight;
-
-  // offsetX/offsetY are relative to the canvas content box
-  const x = e.offsetX * scaleX;
-  const y = e.offsetY * scaleY;
-
+function mouseToCell(ev) {
+  const rect = canvas.getBoundingClientRect();
+  const clientX = ev.clientX ?? (ev.touches && ev.touches[0].clientX);
+  const clientY = ev.clientY ?? (ev.touches && ev.touches[0].clientY);
+  const xCSS = clientX - rect.left;
+  const yCSS = clientY - rect.top;
+  const scaleX = canvas.width  / rect.width;
+  const scaleY = canvas.height / rect.height;
+  const x = xCSS * scaleX;
+  const y = yCSS * scaleY;
   return { c: Math.floor(x / CELL), r: Math.floor(y / CELL) };
 }
 
@@ -414,6 +415,61 @@ speedEl.addEventListener('input', () => {
 densityEl.addEventListener('input', () => {
   showStatus(`Obstacle density: ${densityEl.value}% — click “Random Rocks” to apply`);
 });
+
+function onCanvasPointer(ev) {
+  const { c, r } = mouseToCell(ev);
+
+  // keep borders fenced
+  if (r === 0 || c === 0 || r === ROWS-1 || c === COLS-1) return;
+
+  // If we're in "pick-up" mode, drop Start/Goal here if valid
+  if (pendingMove === "start") {
+    if (grid[index(c,r)] === 0 && !(c === goal.c && r === goal.r)) {
+      start = { c, r };
+      tractor = { ...start, dir: "E" };
+      path = [];
+      pendingMove = null;
+      showStatus("Moved Start");
+      draw();
+    } else {
+      showStatus("Can't place Start on rock/Goal");
+    }
+    return;
+  }
+  if (pendingMove === "goal") {
+    if (grid[index(c,r)] === 0 && !(c === start.c && r === start.r)) {
+      goal = { c, r };
+      path = [];
+      pendingMove = null;
+      showStatus("Moved Goal");
+      draw();
+    } else {
+      showStatus("Can't place Goal on rock/Start");
+    }
+    return;
+  }
+
+  // Not moving: did we tap Start or Goal to pick it up?
+  if (c === start.c && r === start.r) {
+    pendingMove = "start";
+    showStatus("Tap a new cell to move Start");
+    return;
+  }
+  if (c === goal.c && r === goal.r) {
+    pendingMove = "goal";
+    showStatus("Tap a new cell to move Goal");
+    return;
+  }
+
+  // Otherwise, toggle a rock
+  if (!((c === start.c && r === start.r) || (c === goal.c && r === goal.r))) {
+    grid[index(c,r)] = grid[index(c,r)] ? 0 : 1;
+    path = [];
+    draw();
+  }
+}
+
+canvas.addEventListener("pointerdown", onCanvasPointer, { passive: true });
 
 // boot
 resetGrid();
