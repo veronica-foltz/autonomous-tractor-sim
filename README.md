@@ -2,7 +2,7 @@
 
 Live demo: https://veronica-foltz.github.io/autonomous-tractor-sim/
 
-A browser-based simulator for autonomous field navigation. It plans a shortest path with A* and can mow/cover the entire field with a boustrophedon sweep. Includes a clean UI, live speed control, Stop button, obstacle randomization, and coverage metrics. Runs 100% client-side—no installs.
+A browser-based simulator for autonomous field navigation. It plans a shortest path with A* and can mow/cover the entire field with a boustrophedon sweep. Includes a clean UI, live speed control, Stop button, obstacle randomization, and coverage metrics. 
 
 ---
 
@@ -27,8 +27,8 @@ Features
 
 How it works
 - The field is a grid (blocked cells = rocks).  
-- **A\*** uses Manhattan distance and expands 4 neighbors; cost per move is 1, with turn counts tracked for “fuel.”  
-- **Coverage** orders free cells in a snake (boustrophedon) pattern and chains them with **A\***, skipping unreachable islands.
+- A* uses Manhattan distance and expands 4 neighbors
+- Coverage orders free cells in a snake (boustrophedon) pattern and chains them with A*, skipping unreachable islands.
 
 ---
 
