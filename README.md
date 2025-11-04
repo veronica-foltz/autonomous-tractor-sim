@@ -21,7 +21,7 @@ Features
 - Live speed slider (changes mid-drive) and a Stop button
 - Coverage meter + steps, turns, fuel/time** estimates
 - Random Rocks with adjustable density
-- Pure HTML/CSS/JS + Canvas (no frameworks or builds)
+- Pure HTML/CSS/JS + Canvas (no frameworks or builds) 
 
 ---
 
