@@ -17,7 +17,6 @@ Business problems this helps illustrate
 Features
 - A* pathfinding (4-way) from Start → Goal, avoiding obstacles (“rocks”)
 - Mow Field full-coverage path (boustrophedon sweep + A\* hops around gaps)
-- Edit modes: Rocks / Set Start / Set Goal (click grid to update)
 - Live speed slider (changes mid-drive) and a Stop button
 - Coverage meter + steps, turns, fuel/time** estimates
 - Random Rocks with adjustable density
