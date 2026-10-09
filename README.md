@@ -1,16 +1,8 @@
 🚜 Autonomous Tractor Simulation
 
 Live demo: https://veronica-foltz.github.io/autonomous-tractor-sim/
-
+ 
 A browser-based simulator for autonomous field navigation. It plans a shortest path with A* and can mow/cover the entire field with a boustrophedon sweep. Includes a clean UI, live speed control, Stop button, obstacle randomization, and coverage metrics. 
-
----
-
-Business problems this helps illustrate
-- Reduce overlap & fuel/time waste: Simulate coverage patterns to minimize re-driving the same ground; turns are penalized to mirror real fuel/time costs.  
-- Pre-planning & what-if scenarios: Try different obstacle layouts (fences, rocks, wet patches) to see how routes change before sending equipment to the field.  
-- Operator training / onboarding: Safe, visual way to explain how autonomy plans routes and why it sometimes takes “longer but cheaper” paths.  
-- R&D demo for autonomy features: Quickly show stakeholders how A* path planning and coverage sweeps behave. 
 
 ---
 
